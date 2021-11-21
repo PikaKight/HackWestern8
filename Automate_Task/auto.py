@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 import time
 import json
 
-def login(driver):
+def login(driver, un, pw):
     driver.find_element(By.ID, "loginLink").click()
     time.sleep(1)
     driver.find_element(By.XPATH, "//button[text()[contains(.,'Western Student Login')]]").click()
@@ -17,26 +17,46 @@ def login(driver):
     username = driver.find_element(By.ID, "userId")
     password = driver.find_element(By.ID, "password")
 
-    username.send_keys(input())
-    password.send_keys(input())
+    username.send_keys(un)
+    password.send_keys(pw)
 
     driver.find_element(By.NAME, "submit").click()
-    
-def auto():
+
+def booking(driver, date, time):
+    cards = driver.find_element(By.CLASS_NAME, "thumbnail")
+    for card in cards:
+        if date in card.find_element(By.CLASS_NAME, "pull-left").text:
+            if time in card.find_element(By.TAG_NAME, "small").text :
+                try:
+                    item = card.find_element(By.XPATH, "//button[text()=Register]")
+                    return True
+                except:
+                    break
+    return False
+
+def auto(cat):
     PATH = "C:\Program Files (x86)\chromedriver.exe"
     driver = webdriver.Chrome(PATH)
     
 
     driver.get("https://shop.westernmustangs.ca/Program/GetProducts?classification=d818e98b-a3ed-4636-a8be-43e4645fc87d")
 
-    login(driver)
+    login(driver, input(), input())
 
-    driver.find_element(By.XPATH, "//h4[text()='*Fitness Centre Entrance Reservation']").click()
+    driver.find_element(By.XPATH, f"//h4[text()='{cat}']").click()
     
+    time.sleep(1)
+
+    if booking(driver, "Sunday, November 21, 2021", "9:00 AM"):
+        print("done")
+    else: 
+        print("this timeslot is either full or does not exist, please enter a new time")
+
+
     time.sleep(30)
 
     driver.quit()
 
 
 if __name__=="__main__":
-    auto()
+    auto("Drop In Badminton")
