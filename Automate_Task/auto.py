@@ -23,11 +23,14 @@ def login(driver, un, pw):
     driver.find_element(By.NAME, "submit").click()
 
 def booking(driver, date, time):
-    cards = driver.find_element(By.CLASS_NAME, "thumbnail")
+    cards = driver.find_elements(By.CLASS_NAME, "thumbnail")
     for card in cards:
         if date in card.find_element(By.CLASS_NAME, "pull-left").text:
-            if time in card.find_element(By.TAG_NAME, "small").text :
+            print("Hi\n\n")
+            if time in card.find_element(By.TAG_NAME, "small").text:
+                print("Hi2\n\n")
                 try:
+                    print("Hi3\n\n")
                     item = card.find_element(By.XPATH, "//button[text()=Register]")
                     return True
                 except:
@@ -41,19 +44,19 @@ def auto(cat):
 
     driver.get("https://shop.westernmustangs.ca/Program/GetProducts?classification=d818e98b-a3ed-4636-a8be-43e4645fc87d")
 
-    login(driver, input(), input())
+    login(driver, input, input)
 
     driver.find_element(By.XPATH, f"//h4[text()='{cat}']").click()
     
     time.sleep(1)
 
-    if booking(driver, "Sunday, November 21, 2021", "9:00 AM"):
+    if booking(driver, "Sunday, November 21, 2021", "10:30 AM"):
         print("done")
     else: 
         print("this timeslot is either full or does not exist, please enter a new time")
 
 
-    time.sleep(30)
+    time.sleep(5)
 
     driver.quit()
 
