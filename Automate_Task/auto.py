@@ -11,7 +11,7 @@ import json
 def login(driver):
     driver.find_element(By.ID, "loginLink").click()
     time.sleep(1)
-    print(driver.find_element(By.CLASS_NAME, "divLoginModal").find_element(By.XPATH,"//button"))
+    driver.find_element(By.XPATH, "//button[text()[contains(.,'Western Student Login')]]").click()
     
 
     
