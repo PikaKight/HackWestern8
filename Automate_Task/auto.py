@@ -36,8 +36,12 @@ def auto():
             EC.element_to_be_clickable((By.XPATH, "div[@onclick=window.location='/Program/GetProgramDetails?courseId=4cbf8cd1-3fca-4e35-b331-a8dbb9b5a86f&semesterId=81dac0e7-2456-44c9-bfe4-6ed494cc6824']")).click()
         )
     except:
+<<<<<<< HEAD
         time.sleep(5)
         
+=======
+        time.sleep(30)
+>>>>>>> eb5bcb9c591bb3b0c7f0b88ac68e4ed46d129de8
         driver.quit()
 
 
