@@ -30,7 +30,6 @@ def auto():
         )
     except:
         time.sleep(30)
-        
         driver.quit()
 
 
