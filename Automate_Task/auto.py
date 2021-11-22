@@ -37,14 +37,14 @@ def booking(driver, date, time):
                     break
     return False
 
-def auto(cat):
-    PATH = "C:\Program Files (x86)\chromedriver.exe"
+def main(cat, un, pw):
+    PATH = "Chrome_Driver\chromedriver.exe"
     driver = webdriver.Chrome(PATH)
     
 
     driver.get("https://shop.westernmustangs.ca/Program/GetProducts?classification=d818e98b-a3ed-4636-a8be-43e4645fc87d")
 
-    login(driver, input, input)
+    login(driver, un, pw)
 
     driver.find_element(By.XPATH, f"//h4[text()='{cat}']").click()
     
@@ -62,4 +62,4 @@ def auto(cat):
 
 
 if __name__=="__main__":
-    auto("Drop In Badminton")
+    auto("Drop In Badminton", input(), input())
